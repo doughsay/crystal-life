@@ -11,6 +11,9 @@ class Window
     @handle = LibGLFW.create_window @width, @height, @title, nil, nil
 
     raise "Failed to open GLFW window" if @handle.is_a?(Nil)
+
+    @last_time = LibGLFW.get_time
+    @frames = 0
   end
 
   def set_context_current
@@ -19,6 +22,7 @@ class Window
 
   def open(&block)
     while true
+      print_fps
       LibGLFW.poll_events
       break if LibGLFW.get_key(@handle, LibGLFW::KEY_ESCAPE) == LibGLFW::PRESS && LibGLFW.window_should_close(@handle)
       yield
@@ -26,5 +30,17 @@ class Window
     end
 
     LibGLFW.terminate
+  end
+
+  private def print_fps
+    current_time = LibGLFW.get_time
+    @frames += 1
+
+    diff = current_time - @last_time
+    if diff >= 1.0
+      puts "#{(diff * 1000.0) / @frames} ms/frame"
+      @frames = 0
+      @last_time += diff
+    end
   end
 end
