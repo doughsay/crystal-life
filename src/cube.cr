@@ -20,12 +20,6 @@ class Cube
     -CUBE_SIZE,  CUBE_SIZE,  CUBE_SIZE,  1.0_f32, 1.0_f32, 1.0_f32,  # 6
      CUBE_SIZE,  CUBE_SIZE,  CUBE_SIZE,  0.6_f32, 0.6_f32, 0.6_f32   # 7
   ]
-  NUM_VERTICES = VERTICES.size
-  VERTEX_SIZE = sizeof(Float32)
-  VERTICES_SIZE = VERTEX_SIZE * NUM_VERTICES
-  STRIDE = 6 * VERTEX_SIZE
-  VERTEX_OFFSET = Offset.new(0)
-  COLOR_OFFSET = Offset.new(3 * VERTEX_SIZE)
 
   INDICES = [
     4_u32, 5_u32, 1_u32,
@@ -41,39 +35,42 @@ class Cube
     6_u32, 7_u32, 5_u32,
     6_u32, 5_u32, 4_u32
   ]
-  NUM_INDICES = INDICES.size
-  INDEX_SIZE = sizeof(UInt32)
-  INDICES_SIZE = INDEX_SIZE * NUM_INDICES
-  INDEX_OFFSET = Offset.new(0)
 
-  alias Offset = Pointer(Void)
+  @vao : GL::VertexArray
+  @vbo : GL::Buffer
+  @ebo : GL::Buffer
+  @ibo : GL::Buffer
 
-  def initialize(@instances = [] of Float32)
+  def initialize
+    @instances = [] of Float32
+
     # create vertex array object
-    GL.gen_vertex_arrays(1, out @vao)
+    @vao = GL.gen_vertex_array
     GL.bind_vertex_array(@vao)
 
-    # create and fill vertex array buffer
-    GL.gen_buffers(1, out @vbo)
-    GL.bind_buffer(GL::ARRAY_BUFFER, @vbo)
-    GL.buffer_data(GL::ARRAY_BUFFER, VERTICES_SIZE, VERTICES, GL::STATIC_DRAW)
+    # generate all needed buffers
+    @vbo, @ebo, @ibo = GL.gen_buffers(3)
+
+    # fill the vertex array buffer
+    GL.bind_buffer(GL::BufferBindingTarget::ArrayBuffer, @vbo)
+    GL.buffer_data(GL::BufferBindingTarget::ArrayBuffer, VERTICES.size * sizeof(Float32), VERTICES, GL::BufferUsage::StaticDraw)
+
     # set and enable pointer to vertex position data
-    GL.vertex_attrib_pointer(0, 3, GL::FLOAT, GL::FALSE, STRIDE, VERTEX_OFFSET)
+    GL.vertex_attrib_pointer(0, 3, GL::Type::Float, false, 6 * sizeof(Float32), 0)
     GL.enable_vertex_attrib_array(0)
+
     # set and enable pointer to vertex color data
-    GL.vertex_attrib_pointer(1, 3, GL::FLOAT, GL::FALSE, STRIDE, COLOR_OFFSET)
+    GL.vertex_attrib_pointer(1, 3, GL::Type::Float, false, 6 * sizeof(Float32), 3 * sizeof(Float32))
     GL.enable_vertex_attrib_array(1)
 
-    # create and fill the index element buffer
-    GL.gen_buffers(1, out @ebo)
-    GL.bind_buffer(GL::ELEMENT_ARRAY_BUFFER, @ebo)
-    GL.buffer_data(GL::ELEMENT_ARRAY_BUFFER, INDICES_SIZE, INDICES, GL::STATIC_DRAW)
+    # fill the index element buffer
+    GL.bind_buffer(GL::BufferBindingTarget::ElementArrayBuffer, @ebo)
+    GL.buffer_data(GL::BufferBindingTarget::ElementArrayBuffer, INDICES.size * sizeof(UInt32), INDICES, GL::BufferUsage::StaticDraw)
 
-    # create the instance positions buffer
-    GL.gen_buffers(1, out @ibo)
-    GL.bind_buffer(GL::ARRAY_BUFFER, @ibo)
+    # fill the instance positions buffer
+    GL.bind_buffer(GL::BufferBindingTarget::ArrayBuffer, @ibo)
     # set and enable pointer to instance position data
-    GL.vertex_attrib_pointer(2, 3, GL::FLOAT, GL::FALSE, 3 * sizeof(Float32), Offset.new(0))
+    GL.vertex_attrib_pointer(2, 3,GL::Type::Float, false, 3 * sizeof(Float32), 0)
     GL.vertex_attrib_divisor(2, 1)
     GL.enable_vertex_attrib_array(2)
   end
@@ -89,20 +86,18 @@ class Cube
       end
       3 * points.size
     end
-    GL.bind_buffer(GL::ARRAY_BUFFER, @ibo)
-    GL.buffer_data(GL::ARRAY_BUFFER, @instances.size * sizeof(Float32), @instances, GL::DYNAMIC_DRAW)
+    GL.bind_buffer(GL::BufferBindingTarget::ArrayBuffer, @ibo)
+    GL.buffer_data(GL::BufferBindingTarget::ArrayBuffer, @instances.size * sizeof(Float32), @instances, GL::BufferUsage::DynamicDraw)
   end
 
   def draw
     return unless @instances.size > 0
     GL.bind_vertex_array(@vao)
-    GL.draw_elements_instanced(GL::TRIANGLES, NUM_INDICES, GL::UNSIGNED_INT, INDEX_OFFSET, @instances.size / 3)
+    GL.draw_elements_instanced(GL::Primitive::Triangles, INDICES.size, GL::Type::UnsignedInt, 0, @instances.size / 3)
   end
 
   def delete
-    GL.delete_vertex_arrays(1, pointerof(@vao))
-    GL.delete_buffers(1, pointerof(@vbo))
-    GL.delete_buffers(1, pointerof(@ebo))
-    GL.delete_buffers(1, pointerof(@ibo))
+    GL.delete_vertex_array(@vao)
+    GL.delete_buffers([@vbo, @ebo, @ibo])
   end
 end
