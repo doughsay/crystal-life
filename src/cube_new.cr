@@ -22,57 +22,57 @@ class Cube
   VERTICES = {
     North => [
       # positions                          # colors                       # tex?
-      +CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32,  # 1
-      -CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32,  # 4
-      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32,  # 5
-      +CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32,  # 1
-      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32,  # 0
-      -CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32   # 4
+      +CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 0.0_f32,  # 1
+      -CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 0.0_f32,  # 4
+      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 0.0_f32,  # 5
+      +CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 0.0_f32,  # 1
+      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 0.0_f32,  # 0
+      -CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 0.0_f32   # 4
     ],
     South => [
       # positions                          # colors                       # tex?
       # -CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 0.0_f32,  # 2
       # +CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 0.0_f32,  # 7
       # -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 0.0_f32,  # 6
-      -CUBE_SIZE * 4, -CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32,  # 2
-      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32,  # 3
-      +CUBE_SIZE, +CUBE_SIZE * 4, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32   # 7
+      -CUBE_SIZE * 4, -CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 0.0_f32,  # 2
+      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 0.0_f32,  # 3
+      +CUBE_SIZE, +CUBE_SIZE * 4, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 1.0_f32   # 7
     ],
     East => [
       # positions                          # colors                    # tex?
-      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,  # 3
-      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,  # 5
-      +CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,  # 7
-      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,  # 3
-      +CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,  # 1
-      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32   # 5
+      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  0.0_f32, 0.0_f32,  # 3
+      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  0.0_f32, 0.0_f32,  # 5
+      +CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  0.0_f32, 0.0_f32,  # 7
+      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  0.0_f32, 0.0_f32,  # 3
+      +CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  0.0_f32, 0.0_f32,  # 1
+      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  0.0_f32, 0.0_f32   # 5
     ],
     West => [
       # positions                          # colors                    # tex?
-      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,   # 0
-      -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,   # 6
-      -CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,   # 4
-      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,   # 0
-      -CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,   # 2
-      -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32    # 6
+      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  0.0_f32, 0.0_f32,   # 0
+      -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  0.0_f32, 0.0_f32,   # 6
+      -CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  0.0_f32, 0.0_f32,   # 4
+      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  0.0_f32, 0.0_f32,   # 0
+      -CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  0.0_f32, 0.0_f32,   # 2
+      -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  0.0_f32, 0.0_f32    # 6
     ],
     Up => [
       # positions                          # colors                      # tex?
-      -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 6
-      +CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 7
-      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 5
-      -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 6
-      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 5
-      -CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32   # 4
+      -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  0.0_f32, 0.0_f32,  # 6
+      +CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  0.0_f32, 0.0_f32,  # 7
+      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  0.0_f32, 0.0_f32,  # 5
+      -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  0.0_f32, 0.0_f32,  # 6
+      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  0.0_f32, 0.0_f32,  # 5
+      -CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  0.0_f32, 0.0_f32   # 4
     ],
     Down => [
       # positions                          # colors                      # tex?
-      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 0
-      +CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 1
-      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 3
-      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 0
-      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 3
-      -CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32   # 2
+      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  0.0_f32, 0.0_f32,  # 0
+      +CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  0.0_f32, 0.0_f32,  # 1
+      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  0.0_f32, 0.0_f32,  # 3
+      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  0.0_f32, 0.0_f32,  # 0
+      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  0.0_f32, 0.0_f32,  # 3
+      -CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  0.0_f32, 0.0_f32   # 2
     ]
   }
 
@@ -214,7 +214,7 @@ class Cube
     GL.enable_vertex_attrib_array(1)
 
     # set and enable pointer to texture coordinate data
-    GL.vertex_attrib_pointer(2, 2, GL::Type::Float, false, 8 * sizeof(Float32), 5 * sizeof(Float32))
+    GL.vertex_attrib_pointer(2, 2, GL::Type::Float, false, 8 * sizeof(Float32), 6 * sizeof(Float32))
     GL.enable_vertex_attrib_array(2)
 
     # fill the instance positions buffer
