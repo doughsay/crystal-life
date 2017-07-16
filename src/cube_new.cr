@@ -21,52 +21,58 @@ class Cube
 
   VERTICES = {
     North => [
-      +CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  # 1
-      -CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  # 4
-      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  # 5
-      +CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  # 1
-      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  # 0
-      -CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32   # 4
+      # positions                          # colors                       # tex?
+      +CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32,  # 1
+      -CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32,  # 4
+      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32,  # 5
+      +CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32,  # 1
+      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32,  # 0
+      -CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32   # 4
     ],
     South => [
-      -CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  # 2
-      +CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  # 7
-      -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  # 6
-      -CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  # 2
-      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  # 3
-      +CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32   # 7
+      # positions                          # colors                       # tex?
+      # -CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 0.0_f32,  # 2
+      # +CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 0.0_f32,  # 7
+      # -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 0.0_f32,  # 6
+      -CUBE_SIZE * 4, -CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32,  # 2
+      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32,  # 3
+      +CUBE_SIZE, +CUBE_SIZE * 4, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  1.0_f32, 1.0_f32   # 7
     ],
     East => [
-      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  # 3
-      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  # 5
-      +CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  # 7
-      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  # 3
-      +CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  # 1
-      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32   # 5
+      # positions                          # colors                    # tex?
+      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,  # 3
+      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,  # 5
+      +CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,  # 7
+      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,  # 3
+      +CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,  # 1
+      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32   # 5
     ],
     West => [
-      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  # 0
-      -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  # 6
-      -CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  # 4
-      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  # 0
-      -CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  # 2
-      -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32   # 6
+      # positions                          # colors                    # tex?
+      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,   # 0
+      -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,   # 6
+      -CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,   # 4
+      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,   # 0
+      -CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32,   # 2
+      -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  1.0_f32, 1.0_f32    # 6
     ],
     Up => [
-      -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  # 6
-      +CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  # 7
-      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  # 5
-      -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  # 6
-      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  # 5
-      -CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32   # 4
+      # positions                          # colors                      # tex?
+      -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 6
+      +CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 7
+      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 5
+      -CUBE_SIZE, +CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 6
+      +CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 5
+      -CUBE_SIZE, +CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32   # 4
     ],
     Down => [
-      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  # 0
-      +CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  # 1
-      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  # 3
-      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  # 0
-      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  # 3
-      -CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32   # 2
+      # positions                          # colors                      # tex?
+      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 0
+      +CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 1
+      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 3
+      -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 0
+      +CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32,  # 3
+      -CUBE_SIZE, -CUBE_SIZE, +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  1.0_f32, 1.0_f32   # 2
     ]
   }
 
@@ -189,7 +195,7 @@ class Cube
     return unless @instances[direction].size > 0
 
     GL.bind_vertex_array(@vertex_array_objects[direction])
-    GL.draw_arrays_instanced(GL::Primitive::Triangles, 0, 6, @instances[direction].size / 3)
+    GL.draw_arrays_instanced(GL::Primitive::Triangles, 0, direction.south? ? 3 : 6, @instances[direction].size / 3)
   end
 
   private def gen(direction : Direction)
@@ -200,20 +206,24 @@ class Cube
     GL.buffer_data(GL::BufferBindingTarget::ArrayBuffer, VERTICES[direction].size * sizeof(Float32), VERTICES[direction], GL::BufferUsage::StaticDraw)
 
     # set and enable pointer to vertex position data
-    GL.vertex_attrib_pointer(0, 3, GL::Type::Float, false, 6 * sizeof(Float32), 0)
+    GL.vertex_attrib_pointer(0, 3, GL::Type::Float, false, 8 * sizeof(Float32), 0)
     GL.enable_vertex_attrib_array(0)
 
     # set and enable pointer to vertex color data
-    GL.vertex_attrib_pointer(1, 3, GL::Type::Float, false, 6 * sizeof(Float32), 3 * sizeof(Float32))
+    GL.vertex_attrib_pointer(1, 3, GL::Type::Float, false, 8 * sizeof(Float32), 3 * sizeof(Float32))
     GL.enable_vertex_attrib_array(1)
+
+    # set and enable pointer to texture coordinate data
+    GL.vertex_attrib_pointer(2, 2, GL::Type::Float, false, 8 * sizeof(Float32), 5 * sizeof(Float32))
+    GL.enable_vertex_attrib_array(2)
 
     # fill the instance positions buffer
     GL.bind_buffer(GL::BufferBindingTarget::ArrayBuffer, @instance_buffer_objects[direction])
     # TODO: this buffer is large, but fixed; if more cubes need to be drawn the buffer needs to be resized
     GL.buffer_data(GL::BufferBindingTarget::ArrayBuffer, MAX_INSTANCES * 3 * sizeof(Float32), nil, GL::BufferUsage::StreamDraw)
     # set and enable pointer to instance position data
-    GL.vertex_attrib_pointer(2, 3,GL::Type::Float, false, 3 * sizeof(Float32), 0)
-    GL.vertex_attrib_divisor(2, 1)
-    GL.enable_vertex_attrib_array(2)
+    GL.vertex_attrib_pointer(3, 3, GL::Type::Float, false, 3 * sizeof(Float32), 0)
+    GL.vertex_attrib_divisor(3, 1)
+    GL.enable_vertex_attrib_array(3)
   end
 end

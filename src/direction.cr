@@ -5,4 +5,8 @@ enum Direction
   West
   Up
   Down
+
+  def south?
+    self == South
+  end
 end

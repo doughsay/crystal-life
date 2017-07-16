@@ -81,7 +81,7 @@ class App
     projection = GLM.perspective(45.0_f32, (1440.0 / 900.0).to_f32, 0.1_f32, 1000.0_f32)
     @shader_program.set_uniform_matrix_4f("projection", projection)
 
-    noise_cubes(120)
+    fill_cubes(1)
     # @scene.load_instances([Point.new(0,0,0), Point.new(1,1,1), Point.new(1,0,0)])
   end
 
