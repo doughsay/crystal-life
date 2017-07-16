@@ -8,15 +8,6 @@ class Cube
   #  \|______\|
   #   2       3
 
-  enum Direction
-    North
-    South
-    East
-    West
-    Up
-    Down
-  end
-
   North = Direction::North
   South = Direction::South
   East = Direction::East
@@ -24,9 +15,9 @@ class Cube
   Up = Direction::Up
   Down = Direction::Down
 
-  MAX_INSTANCES = 600_000
+  MAX_INSTANCES = 1_200_000
 
-  CUBE_SIZE = 0.45_f32
+  CUBE_SIZE = 0.5_f32
 
   VERTICES = {
     North => [
@@ -141,13 +132,30 @@ class Cube
     GL.delete_buffers(@vertex_buffer_objects.values + @instance_buffer_objects.values)
   end
 
-  def load_instances(points : Array(Point))
-    load_direction_instances(North, points)
-    load_direction_instances(South, points)
-    load_direction_instances(East, points)
-    load_direction_instances(West, points)
-    load_direction_instances(Up, points)
-    load_direction_instances(Down, points)
+  def load_instances(points : Hash(Point, Bool))
+    faces = {
+      North => ([] of Point),
+      South => ([] of Point),
+      East => ([] of Point),
+      West => ([] of Point),
+      Up => ([] of Point),
+      Down => ([] of Point)
+    }
+    points.each_key do |point|
+      faces[North] << point unless points.has_key?(point.neighbor(North))
+      faces[South] << point unless points.has_key?(point.neighbor(South))
+      faces[East] << point unless points.has_key?(point.neighbor(East))
+      faces[West] << point unless points.has_key?(point.neighbor(West))
+      faces[Up] << point unless points.has_key?(point.neighbor(Up))
+      faces[Down] << point unless points.has_key?(point.neighbor(Down))
+    end
+
+    load_direction_instances(North, faces[North])
+    load_direction_instances(South, faces[South])
+    load_direction_instances(East, faces[East])
+    load_direction_instances(West, faces[West])
+    load_direction_instances(Up, faces[Up])
+    load_direction_instances(Down, faces[Down])
   end
 
   def draw

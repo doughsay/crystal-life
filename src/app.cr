@@ -2,20 +2,22 @@ require "gl"
 require "./glm"
 require "./window"
 require "./shader_program"
+require "./direction"
 require "./cube_new"
 require "./point"
+require "./noise"
 
 class App
   def initialize
-    @window = Window.new(800, 600, "OMG! 3D!")
+    @window = Window.new(1440, 900, "OMG! 3D!")
     @window.set_context_current
     @shader_program = ShaderProgram.new("./src/shaders/vertex_shader.glsl", "./src/shaders/fragment_shader.glsl")
     @scene = Cube.new
     @rand = Random.new
     @camera_rot = 0.0
-    @camera_zoom = -10.0
+    @camera_zoom = -100.0
     @camera_tilt = -0.61
-    @points = [] of Point
+    @points = {} of Point => Bool
   end
 
   def run
@@ -29,28 +31,45 @@ class App
   end
 
   private def random_cubes(size)
-    @points = [] of Point
+    @points = {} of Point => Bool
     (-size..size).each do |x|
       (-size..size).each do |y|
         (-size..size).each do |z|
           if @rand.next_bool
-            @points << Point.new(x, y, z)
+            @points[Point.new(x, y, z)] = true
           end
         end
       end
     end
+    puts @points.size
     @scene.load_instances(@points)
   end
 
   private def fill_cubes(size)
-    @points = [] of Point
+    @points = {} of Point => Bool
     (-size..size).each do |x|
       (-size..size).each do |y|
         (-size..size).each do |z|
-          @points << Point.new(x, y, z)
+          @points[Point.new(x, y, z)] = true
         end
       end
     end
+    puts @points.size
+    @scene.load_instances(@points)
+  end
+
+  private def noise_cubes(size)
+    @points = {} of Point => Bool
+    (-size..size).each do |x|
+      (-size..size).each do |y|
+        (-size..size).each do |z|
+          if Noise.generate(x.to_f / 30.0, y.to_f / 30.0, z.to_f / 30.0) > 0.05
+            @points[Point.new(x, y, z)] = true
+          end
+        end
+      end
+    end
+    puts @points.size
     @scene.load_instances(@points)
   end
 
@@ -59,10 +78,10 @@ class App
     GL.enable(GL::Capability::DepthTest)
     GL.enable(GL::Capability::CullFace)
 
-    projection = GLM.perspective(45.0_f32, (800.0 / 600.0).to_f32, 0.1_f32, 1000.0_f32)
+    projection = GLM.perspective(45.0_f32, (1440.0 / 900.0).to_f32, 0.1_f32, 1000.0_f32)
     @shader_program.set_uniform_matrix_4f("projection", projection)
 
-    fill_cubes(1)
+    noise_cubes(120)
     # @scene.load_instances([Point.new(0,0,0), Point.new(1,1,1), Point.new(1,0,0)])
   end
 
@@ -73,12 +92,13 @@ class App
   private def render
     clear
 
-    # random_cubes(10 + (Math.sin(GLFW.get_time) * 10).to_i)
+    # random_cubes(20 + (Math.sin(GLFW.get_time) * 20).to_i)
+    # random_cubes(40)
 
     model = GLM::Mat4.identity
 
-    @camera_rot += 0.05 if @window.key_pressed?(GLFW::Key::Left)
-    @camera_rot -= 0.05 if @window.key_pressed?(GLFW::Key::Right)
+    @camera_rot += 0.02 if @window.key_pressed?(GLFW::Key::Left)
+    @camera_rot -= 0.02 if @window.key_pressed?(GLFW::Key::Right)
     # @camera_tilt += 0.05 if @window.key_pressed?(GLFW::Key::Up)
     # @camera_tilt -= 0.05 if @window.key_pressed?(GLFW::Key::Down)
     @camera_zoom += 1.0 if @window.key_pressed?(GLFW::Key::Up)
@@ -95,6 +115,10 @@ class App
     #   end
     #   @scene.load_instances(@points)
     # end
+
+    if @window.key_pressed?(GLFW::Key::Space)
+      random_cubes(70)
+    end
 
     view = GLM.translate(GLM.vec3(0.0, 0.0, @camera_zoom))
     view = GLM.rotate(view, @camera_tilt, GLM.vec3(1.0, 0.0, 0.0))
