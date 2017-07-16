@@ -8,7 +8,7 @@ class Cube
   #  \|______\|
   #   2       3
 
-  CUBE_SIZE = 0.45_f32
+  CUBE_SIZE = 0.5_f32
   VERTICES = [
     # positions                          # colors
     -CUBE_SIZE, -CUBE_SIZE, -CUBE_SIZE,  0.4_f32, 0.4_f32, 0.4_f32,  # 0
@@ -70,7 +70,7 @@ class Cube
     # fill the instance positions buffer
     GL.bind_buffer(GL::BufferBindingTarget::ArrayBuffer, @ibo)
     # TODO: this buffer is large, but fixed; if more cubes need to be drawn the buffer needs to be resized
-    GL.buffer_data(GL::BufferBindingTarget::ArrayBuffer, (2 ** 20) * sizeof(Float32), nil, GL::BufferUsage::StreamDraw)
+    GL.buffer_data(GL::BufferBindingTarget::ArrayBuffer, (2 ** 21) * sizeof(Float32), nil, GL::BufferUsage::StreamDraw)
     # set and enable pointer to instance position data
     GL.vertex_attrib_pointer(2, 3,GL::Type::Float, false, 3 * sizeof(Float32), 0)
     GL.vertex_attrib_divisor(2, 1)
