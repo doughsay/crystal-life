@@ -77,12 +77,15 @@ class App
     GL.clear_color(GL::Color.new(0.2, 0.3, 0.5, 1.0))
     GL.enable(GL::Capability::DepthTest)
     GL.enable(GL::Capability::CullFace)
+    # GL.polygon_mode(GL::PolygonFace::FrontAndBack, GL::PolygonMode::Line)
 
     projection = GLM.perspective(45.0_f32, (1440.0 / 900.0).to_f32, 0.1_f32, 1000.0_f32)
     @shader_program.set_uniform_matrix_4f("projection", projection)
 
-    noise_cubes(120)
-    # @scene.load_instances([Point.new(0,0,0), Point.new(1,1,1), Point.new(1,0,0)])
+    # noise_cubes(120)
+    # fill_cubes(1)
+    # @scene.load_instances({Point.new(0,0,0) => true})
+    noise_cubes(20)
   end
 
   private def clear
@@ -104,9 +107,9 @@ class App
     @camera_zoom += 1.0 if @window.key_pressed?(GLFW::Key::Up)
     @camera_zoom -= 1.0 if @window.key_pressed?(GLFW::Key::Down)
 
-    # camera_x = -@camera_zoom * Math.sin(@camera_rot)
-    # camera_y = @camera_zoom * Math.sin(@camera_tilt)
-    # camera_z = -@camera_zoom * Math.cos(@camera_rot) * Math.cos(@camera_tilt)
+    camera_x = -@camera_zoom * Math.sin(@camera_rot)
+    camera_y = @camera_zoom * Math.sin(@camera_tilt)
+    camera_z = -@camera_zoom * Math.cos(@camera_rot) * Math.cos(@camera_tilt)
 
     # if @window.key_pressed?(GLFW::Key::Space)
     #   # sort points:
@@ -127,6 +130,7 @@ class App
     @shader_program.use do
       @shader_program.set_uniform_matrix_4f("model", model)
       @shader_program.set_uniform_matrix_4f("view", view)
+      @shader_program.set_uniform_vector_3f("camera_position", GLM.vec3(camera_x, camera_y, camera_z))
 
       @scene.draw
     end

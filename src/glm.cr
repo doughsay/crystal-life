@@ -86,6 +86,14 @@ module GLM
     def dot(v : TVec3(T))
       x * v.x + y * v.y + z * v.z
     end
+
+    def buffer
+      @buffer
+    end
+
+    def to_unsafe
+      @buffer
+    end
   end
 
   struct TMat4(T)

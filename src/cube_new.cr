@@ -21,40 +21,40 @@ class Cube
 
   VERTICES = {
     North => [
-      # positions                                  # colors                       # tex?
-      +CUBE_SIZE * 3, -CUBE_SIZE,     -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  2.0_f32, 0.0_f32,  # 1
-      -CUBE_SIZE,     -CUBE_SIZE,     -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 0.0_f32,  # 0
-      -CUBE_SIZE,     +CUBE_SIZE * 3, -CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 2.0_f32   # 4
+      # positions                                  # normals                    # tex
+      +CUBE_SIZE,     +CUBE_SIZE * 3, -CUBE_SIZE,  0.0_f32, 0.0_f32, -1.0_f32,  0.0_f32, 2.0_f32,  # 5
+      +CUBE_SIZE,     -CUBE_SIZE,     -CUBE_SIZE,  0.0_f32, 0.0_f32, -1.0_f32,  0.0_f32, 0.0_f32,  # 1
+      -CUBE_SIZE * 3, -CUBE_SIZE,     -CUBE_SIZE,  0.0_f32, 0.0_f32, -1.0_f32,  2.0_f32, 0.0_f32   # 0
     ],
     South => [
-      # positions                                  # colors                       # tex?
-      -CUBE_SIZE * 3, -CUBE_SIZE,     +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  2.0_f32, 0.0_f32,  # 2
-      +CUBE_SIZE,     -CUBE_SIZE,     +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 0.0_f32,  # 3
-      +CUBE_SIZE,     +CUBE_SIZE * 3, +CUBE_SIZE,  0.96_f32, 0.52_f32, 0.12_f32,  0.0_f32, 2.0_f32   # 7
+      # positions                                  # normals                   # tex
+      +CUBE_SIZE * 3, +CUBE_SIZE,     +CUBE_SIZE,  0.0_f32, 0.0_f32, 1.0_f32,  2.0_f32, 0.0_f32,  # 7
+      -CUBE_SIZE,     +CUBE_SIZE,     +CUBE_SIZE,  0.0_f32, 0.0_f32, 1.0_f32,  0.0_f32, 0.0_f32,  # 6
+      -CUBE_SIZE,     -CUBE_SIZE * 3, +CUBE_SIZE,  0.0_f32, 0.0_f32, 1.0_f32,  0.0_f32, 2.0_f32   # 2
     ],
     East => [
-      # positions                                  # colors                    # tex?
-      +CUBE_SIZE, -CUBE_SIZE,     3 * +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  2.0_f32, 0.0_f32,  # 3
-      +CUBE_SIZE, -CUBE_SIZE,         -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  0.0_f32, 0.0_f32,  # 1
-      +CUBE_SIZE, +CUBE_SIZE * 3,     -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  0.0_f32, 2.0_f32   # 5
+      # positions                                  # normals                   # tex
+      +CUBE_SIZE, +CUBE_SIZE,     -CUBE_SIZE * 3,  1.0_f32, 0.0_f32, 0.0_f32,  2.0_f32, 0.0_f32,  # 5
+      +CUBE_SIZE, +CUBE_SIZE,     +CUBE_SIZE,      1.0_f32, 0.0_f32, 0.0_f32,  0.0_f32, 0.0_f32,  # 7
+      +CUBE_SIZE, -CUBE_SIZE * 3, +CUBE_SIZE,      1.0_f32, 0.0_f32, 0.0_f32,  0.0_f32, 2.0_f32   # 3
     ],
     West => [
-      # positions                                  # colors                    # tex?
-      -CUBE_SIZE, -CUBE_SIZE,     3 * -CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  2.0_f32, 0.0_f32,   # 0
-      -CUBE_SIZE, -CUBE_SIZE,         +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  0.0_f32, 0.0_f32,   # 2
-      -CUBE_SIZE, +CUBE_SIZE * 3,     +CUBE_SIZE,  0.9_f32, 0.4_f32, 0.0_f32,  0.0_f32, 2.0_f32    # 6
+      # positions                                  # normals                    # tex
+      -CUBE_SIZE, +CUBE_SIZE * 3, -CUBE_SIZE,      -1.0_f32, 0.0_f32, 0.0_f32,  2.0_f32, 0.0_f32,   # 4
+      -CUBE_SIZE, -CUBE_SIZE,     -CUBE_SIZE,      -1.0_f32, 0.0_f32, 0.0_f32,  0.0_f32, 0.0_f32,   # 0
+      -CUBE_SIZE, -CUBE_SIZE,     +CUBE_SIZE * 3,  -1.0_f32, 0.0_f32, 0.0_f32,  0.0_f32, 2.0_f32    # 2
     ],
     Up => [
-      # positions                                  # colors                      # tex?
-      +CUBE_SIZE * 3, +CUBE_SIZE,     -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  2.0_f32, 0.0_f32,  # 5
-      -CUBE_SIZE,     +CUBE_SIZE,     -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  0.0_f32, 0.0_f32,  # 4
-      -CUBE_SIZE,     +CUBE_SIZE, 3 * +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  0.0_f32, 2.0_f32   # 6
+      # positions                                  # normals                   # tex
+      +CUBE_SIZE * 3, +CUBE_SIZE,     -CUBE_SIZE,  0.0_f32, 1.0_f32, 0.0_f32,  2.0_f32, 0.0_f32,  # 5
+      -CUBE_SIZE,     +CUBE_SIZE,     -CUBE_SIZE,  0.0_f32, 1.0_f32, 0.0_f32,  0.0_f32, 0.0_f32,  # 4
+      -CUBE_SIZE,     +CUBE_SIZE, 3 * +CUBE_SIZE,  0.0_f32, 1.0_f32, 0.0_f32,  0.0_f32, 2.0_f32   # 6
     ],
     Down => [
-      # positions                                  # colors                      # tex?
-      +CUBE_SIZE * 3, -CUBE_SIZE,     +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  2.0_f32, 0.0_f32,  # 3
-      -CUBE_SIZE,     -CUBE_SIZE,     +CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  0.0_f32, 0.0_f32,  # 2
-      -CUBE_SIZE,     -CUBE_SIZE, 3 * -CUBE_SIZE,  1.0_f32, 0.66_f32, 0.27_f32,  0.0_f32, 2.0_f32   # 0
+      # positions                                  # normals                    # tex
+      +CUBE_SIZE,     -CUBE_SIZE, -CUBE_SIZE * 3,  0.0_f32, -1.0_f32, 0.0_f32,  2.0_f32, 0.0_f32,  # 1
+      +CUBE_SIZE,     -CUBE_SIZE, +CUBE_SIZE,      0.0_f32, -1.0_f32, 0.0_f32,  0.0_f32, 0.0_f32,  # 3
+      -CUBE_SIZE * 3, -CUBE_SIZE, +CUBE_SIZE,      0.0_f32, -1.0_f32, 0.0_f32,  0.0_f32, 2.0_f32   # 2
     ]
   }
 
@@ -191,7 +191,7 @@ class Cube
     GL.vertex_attrib_pointer(0, 3, GL::Type::Float, false, 8 * sizeof(Float32), 0)
     GL.enable_vertex_attrib_array(0)
 
-    # set and enable pointer to vertex color data
+    # set and enable pointer to vertex normal data
     GL.vertex_attrib_pointer(1, 3, GL::Type::Float, false, 8 * sizeof(Float32), 3 * sizeof(Float32))
     GL.enable_vertex_attrib_array(1)
 

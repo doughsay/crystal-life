@@ -29,6 +29,13 @@ class ShaderProgram
     end
   end
 
+  def set_uniform_vector_3f(name, value)
+    use do
+      uniform = GL.get_uniform_location(@program, name)
+      GL.uniform3fv(uniform, 1, value.buffer)
+    end
+  end
+
   private abstract class Shader
     getter :shader
 
