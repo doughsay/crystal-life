@@ -102,8 +102,8 @@ class App
 
     @camera_rot += 0.02 if @window.key_pressed?(GLFW::Key::Left)
     @camera_rot -= 0.02 if @window.key_pressed?(GLFW::Key::Right)
-    # @camera_tilt += 0.05 if @window.key_pressed?(GLFW::Key::Up)
-    # @camera_tilt -= 0.05 if @window.key_pressed?(GLFW::Key::Down)
+    # @camera_tilt += 0.02 if @window.key_pressed?(GLFW::Key::Up)
+    # @camera_tilt -= 0.02 if @window.key_pressed?(GLFW::Key::Down)
     @camera_zoom += 1.0 if @window.key_pressed?(GLFW::Key::Up)
     @camera_zoom -= 1.0 if @window.key_pressed?(GLFW::Key::Down)
 
