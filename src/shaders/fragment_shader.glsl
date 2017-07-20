@@ -6,29 +6,18 @@ uniform vec3 camera_position;
 // inputs
 in vec3 fragment_position; // in world-space
 in vec3 vertex_normal;
-in vec2 texture_coords;
+in vec3 instance_color;
 
 // outputs
 out vec4 fragment_color;
 
 // program
 void main() {
-  if (texture_coords.x > 1.0f || texture_coords.y > 1.0f) {
-    // discard any fragments outside 0.0 -> 1.0 texture coords
-    discard;
-  }
-
-  // if (texture_coords.x >= 0.1f && texture_coords.x <= 0.9f && texture_coords.y >= 0.1f && texture_coords.y <= 0.9f) {
-  //   // "wireframe" mode
-  //   discard;
-  // }
-
   // for now, the light position will be the camera position
   // vec3 light_position = camera_position;
   vec3 light_position = vec3(20.0f, 128.0f, 60.0f);
 
-  // base colors
-  vec3 object_color = vec3(0.9f, 0.4f, 0.0f);
+  // light color
   vec3 light_color = vec3(1.0f, 1.0f, 1.0f);
 
   // ambient light
@@ -49,7 +38,7 @@ void main() {
   vec3 specular = specular_strength * spec * light_color;
 
   // lighting result
-  vec3 result = (ambient + diffuse + specular) * object_color;
+  vec3 result = (ambient + diffuse + specular) * instance_color;
 
   // send out final fragment color
   fragment_color = vec4(result, 1.0f);

@@ -17,44 +17,60 @@ class Cube
 
   MAX_INSTANCES = 1_200_000
 
-  CUBE_SIZE = 0.5_f32
-
   VERTICES = {
     North => [
-      # positions                                  # normals                    # tex
-      +CUBE_SIZE,     +CUBE_SIZE * 3, -CUBE_SIZE,  0.0_f32, 0.0_f32, -1.0_f32,  0.0_f32, 2.0_f32,  # 5
-      +CUBE_SIZE,     -CUBE_SIZE,     -CUBE_SIZE,  0.0_f32, 0.0_f32, -1.0_f32,  0.0_f32, 0.0_f32,  # 1
-      -CUBE_SIZE * 3, -CUBE_SIZE,     -CUBE_SIZE,  0.0_f32, 0.0_f32, -1.0_f32,  2.0_f32, 0.0_f32   # 0
+      # position                  normal
+      1.0_f32, 0.0_f32, 0.0_f32,  0.0_f32, 0.0_f32, -1.0_f32,  # 1
+      0.0_f32, 1.0_f32, 0.0_f32,  0.0_f32, 0.0_f32, -1.0_f32,  # 4
+      1.0_f32, 1.0_f32, 0.0_f32,  0.0_f32, 0.0_f32, -1.0_f32,  # 5
+      1.0_f32, 0.0_f32, 0.0_f32,  0.0_f32, 0.0_f32, -1.0_f32,  # 1
+      0.0_f32, 0.0_f32, 0.0_f32,  0.0_f32, 0.0_f32, -1.0_f32,  # 0
+      0.0_f32, 1.0_f32, 0.0_f32,  0.0_f32, 0.0_f32, -1.0_f32   # 4
     ],
     South => [
-      # positions                                  # normals                   # tex
-      +CUBE_SIZE * 3, +CUBE_SIZE,     +CUBE_SIZE,  0.0_f32, 0.0_f32, 1.0_f32,  2.0_f32, 0.0_f32,  # 7
-      -CUBE_SIZE,     +CUBE_SIZE,     +CUBE_SIZE,  0.0_f32, 0.0_f32, 1.0_f32,  0.0_f32, 0.0_f32,  # 6
-      -CUBE_SIZE,     -CUBE_SIZE * 3, +CUBE_SIZE,  0.0_f32, 0.0_f32, 1.0_f32,  0.0_f32, 2.0_f32   # 2
+      # position                  normal
+      0.0_f32, 0.0_f32, 1.0_f32,  0.0_f32, 0.0_f32, 1.0_f32,  # 2
+      1.0_f32, 1.0_f32, 1.0_f32,  0.0_f32, 0.0_f32, 1.0_f32,  # 7
+      0.0_f32, 1.0_f32, 1.0_f32,  0.0_f32, 0.0_f32, 1.0_f32,  # 6
+      0.0_f32, 0.0_f32, 1.0_f32,  0.0_f32, 0.0_f32, 1.0_f32,  # 2
+      1.0_f32, 0.0_f32, 1.0_f32,  0.0_f32, 0.0_f32, 1.0_f32,  # 3
+      1.0_f32, 1.0_f32, 1.0_f32,  0.0_f32, 0.0_f32, 1.0_f32   # 7
     ],
     East => [
-      # positions                                  # normals                   # tex
-      +CUBE_SIZE, +CUBE_SIZE,     -CUBE_SIZE * 3,  1.0_f32, 0.0_f32, 0.0_f32,  2.0_f32, 0.0_f32,  # 5
-      +CUBE_SIZE, +CUBE_SIZE,     +CUBE_SIZE,      1.0_f32, 0.0_f32, 0.0_f32,  0.0_f32, 0.0_f32,  # 7
-      +CUBE_SIZE, -CUBE_SIZE * 3, +CUBE_SIZE,      1.0_f32, 0.0_f32, 0.0_f32,  0.0_f32, 2.0_f32   # 3
+      # position                  normal
+      1.0_f32, 0.0_f32, 1.0_f32,  1.0_f32, 0.0_f32, 0.0_f32,  # 3
+      1.0_f32, 1.0_f32, 0.0_f32,  1.0_f32, 0.0_f32, 0.0_f32,  # 5
+      1.0_f32, 1.0_f32, 1.0_f32,  1.0_f32, 0.0_f32, 0.0_f32,  # 7
+      1.0_f32, 0.0_f32, 1.0_f32,  1.0_f32, 0.0_f32, 0.0_f32,  # 3
+      1.0_f32, 0.0_f32, 0.0_f32,  1.0_f32, 0.0_f32, 0.0_f32,  # 1
+      1.0_f32, 1.0_f32, 0.0_f32,  1.0_f32, 0.0_f32, 0.0_f32   # 5
     ],
     West => [
-      # positions                                  # normals                    # tex
-      -CUBE_SIZE, +CUBE_SIZE * 3, -CUBE_SIZE,      -1.0_f32, 0.0_f32, 0.0_f32,  2.0_f32, 0.0_f32,   # 4
-      -CUBE_SIZE, -CUBE_SIZE,     -CUBE_SIZE,      -1.0_f32, 0.0_f32, 0.0_f32,  0.0_f32, 0.0_f32,   # 0
-      -CUBE_SIZE, -CUBE_SIZE,     +CUBE_SIZE * 3,  -1.0_f32, 0.0_f32, 0.0_f32,  0.0_f32, 2.0_f32    # 2
+      # position                  normal
+      0.0_f32, 0.0_f32, 0.0_f32,  -1.0_f32, 0.0_f32, 0.0_f32,  # 0
+      0.0_f32, 1.0_f32, 1.0_f32,  -1.0_f32, 0.0_f32, 0.0_f32,  # 6
+      0.0_f32, 1.0_f32, 0.0_f32,  -1.0_f32, 0.0_f32, 0.0_f32,  # 4
+      0.0_f32, 0.0_f32, 0.0_f32,  -1.0_f32, 0.0_f32, 0.0_f32,  # 0
+      0.0_f32, 0.0_f32, 1.0_f32,  -1.0_f32, 0.0_f32, 0.0_f32,  # 2
+      0.0_f32, 1.0_f32, 1.0_f32,  -1.0_f32, 0.0_f32, 0.0_f32   # 6
     ],
     Up => [
-      # positions                                  # normals                   # tex
-      +CUBE_SIZE * 3, +CUBE_SIZE,     -CUBE_SIZE,  0.0_f32, 1.0_f32, 0.0_f32,  2.0_f32, 0.0_f32,  # 5
-      -CUBE_SIZE,     +CUBE_SIZE,     -CUBE_SIZE,  0.0_f32, 1.0_f32, 0.0_f32,  0.0_f32, 0.0_f32,  # 4
-      -CUBE_SIZE,     +CUBE_SIZE, 3 * +CUBE_SIZE,  0.0_f32, 1.0_f32, 0.0_f32,  0.0_f32, 2.0_f32   # 6
+      # position                  normal
+      0.0_f32, 1.0_f32, 1.0_f32,  0.0_f32, 1.0_f32, 0.0_f32,  # 6
+      1.0_f32, 1.0_f32, 1.0_f32,  0.0_f32, 1.0_f32, 0.0_f32,  # 7
+      1.0_f32, 1.0_f32, 0.0_f32,  0.0_f32, 1.0_f32, 0.0_f32,  # 5
+      0.0_f32, 1.0_f32, 1.0_f32,  0.0_f32, 1.0_f32, 0.0_f32,  # 6
+      1.0_f32, 1.0_f32, 0.0_f32,  0.0_f32, 1.0_f32, 0.0_f32,  # 5
+      0.0_f32, 1.0_f32, 0.0_f32,  0.0_f32, 1.0_f32, 0.0_f32   # 4
     ],
     Down => [
-      # positions                                  # normals                    # tex
-      +CUBE_SIZE,     -CUBE_SIZE, -CUBE_SIZE * 3,  0.0_f32, -1.0_f32, 0.0_f32,  2.0_f32, 0.0_f32,  # 1
-      +CUBE_SIZE,     -CUBE_SIZE, +CUBE_SIZE,      0.0_f32, -1.0_f32, 0.0_f32,  0.0_f32, 0.0_f32,  # 3
-      -CUBE_SIZE * 3, -CUBE_SIZE, +CUBE_SIZE,      0.0_f32, -1.0_f32, 0.0_f32,  0.0_f32, 2.0_f32   # 2
+      # position                  normal
+      0.0_f32, 0.0_f32, 0.0_f32,  0.0_f32, -1.0_f32, 0.0_f32,  # 0
+      1.0_f32, 0.0_f32, 0.0_f32,  0.0_f32, -1.0_f32, 0.0_f32,  # 1
+      1.0_f32, 0.0_f32, 1.0_f32,  0.0_f32, -1.0_f32, 0.0_f32,  # 3
+      0.0_f32, 0.0_f32, 0.0_f32,  0.0_f32, -1.0_f32, 0.0_f32,  # 0
+      1.0_f32, 0.0_f32, 1.0_f32,  0.0_f32, -1.0_f32, 0.0_f32,  # 3
+      0.0_f32, 0.0_f32, 1.0_f32,  0.0_f32, -1.0_f32, 0.0_f32   # 2
     ]
   }
 
@@ -122,20 +138,20 @@ class Cube
 
   def load_instances(points : Hash(Point, Bool))
     faces = {
-      North => ([] of Point),
-      South => ([] of Point),
-      East => ([] of Point),
-      West => ([] of Point),
-      Up => ([] of Point),
-      Down => ([] of Point)
+      North => ([] of Tuple(Point, Tuple(Float64, Float64, Float64))),
+      South => ([] of Tuple(Point, Tuple(Float64, Float64, Float64))),
+      East => ([] of Tuple(Point, Tuple(Float64, Float64, Float64))),
+      West => ([] of Tuple(Point, Tuple(Float64, Float64, Float64))),
+      Up => ([] of Tuple(Point, Tuple(Float64, Float64, Float64))),
+      Down => ([] of Tuple(Point, Tuple(Float64, Float64, Float64)))
     }
     points.each_key do |point|
-      faces[North] << point unless points.has_key?(point.neighbor(North))
-      faces[South] << point unless points.has_key?(point.neighbor(South))
-      faces[East] << point unless points.has_key?(point.neighbor(East))
-      faces[West] << point unless points.has_key?(point.neighbor(West))
-      faces[Up] << point unless points.has_key?(point.neighbor(Up))
-      faces[Down] << point unless points.has_key?(point.neighbor(Down))
+      faces[North] << { point, {0.9, 0.4, 0.0} } unless points.has_key?(point.neighbor(North))
+      faces[South] << { point, {0.9, 0.4, 0.0} } unless points.has_key?(point.neighbor(South))
+      faces[East] << { point, {0.9, 0.4, 0.0} } unless points.has_key?(point.neighbor(East))
+      faces[West] << { point, {0.9, 0.4, 0.0} } unless points.has_key?(point.neighbor(West))
+      faces[Up] << { point, {0.9, 0.4, 0.0} } unless points.has_key?(point.neighbor(Up))
+      faces[Down] << { point, {0.9, 0.4, 0.0} } unless points.has_key?(point.neighbor(Down))
     end
 
     load_direction_instances(North, faces[North])
@@ -155,19 +171,24 @@ class Cube
     draw_direction(Down)
   end
 
-  private def load_direction_instances(direction : Direction, points : Array(Point))
-    raise "Too many instances" if points.size > MAX_INSTANCES
+  private def load_direction_instances(direction : Direction, faces : Array(Tuple(Point, Tuple(Float64, Float64, Float64))))
+    raise "Too many instances" if faces.size > MAX_INSTANCES
 
     GL.bind_vertex_array(@vertex_array_objects[direction])
-    @instances[direction] = Array(Float32).build(3 * points.size) do |buffer|
+    @instances[direction] = Array(Float32).build(6 * faces.size) do |buffer|
       i = 0
-      points.each do |point|
+      faces.each do |face|
+        point = face[0]
         buffer[i] = point.x.to_f32
         buffer[i+1] = point.y.to_f32
         buffer[i+2] = point.z.to_f32
-        i += 3
+        color = face[1]
+        buffer[i+3] = color[0].to_f32
+        buffer[i+4] = color[1].to_f32
+        buffer[i+5] = color[2].to_f32
+        i += 6
       end
-      3 * points.size
+      6 * faces.size
     end
     GL.bind_buffer(GL::BufferBindingTarget::ArrayBuffer, @instance_buffer_objects[direction])
     GL.buffer_sub_data(GL::BufferBindingTarget::ArrayBuffer, 0, @instances[direction].size * sizeof(Float32), @instances[direction])
@@ -177,7 +198,7 @@ class Cube
     return unless @instances[direction].size > 0
 
     GL.bind_vertex_array(@vertex_array_objects[direction])
-    GL.draw_arrays_instanced(GL::Primitive::Triangles, 0, 3, @instances[direction].size / 3)
+    GL.draw_arrays_instanced(GL::Primitive::Triangles, 0, 6, @instances[direction].size / 3)
   end
 
   private def gen(direction : Direction)
@@ -188,23 +209,24 @@ class Cube
     GL.buffer_data(GL::BufferBindingTarget::ArrayBuffer, VERTICES[direction].size * sizeof(Float32), VERTICES[direction], GL::BufferUsage::StaticDraw)
 
     # set and enable pointer to vertex position data
-    GL.vertex_attrib_pointer(0, 3, GL::Type::Float, false, 8 * sizeof(Float32), 0)
+    GL.vertex_attrib_pointer(0, 3, GL::Type::Float, false, 6 * sizeof(Float32), 0)
     GL.enable_vertex_attrib_array(0)
 
     # set and enable pointer to vertex normal data
-    GL.vertex_attrib_pointer(1, 3, GL::Type::Float, false, 8 * sizeof(Float32), 3 * sizeof(Float32))
+    GL.vertex_attrib_pointer(1, 3, GL::Type::Float, false, 6 * sizeof(Float32), 3 * sizeof(Float32))
     GL.enable_vertex_attrib_array(1)
 
-    # set and enable pointer to texture coordinate data
-    GL.vertex_attrib_pointer(2, 2, GL::Type::Float, false, 8 * sizeof(Float32), 6 * sizeof(Float32))
+    # initialize the instance positions buffer
+    GL.bind_buffer(GL::BufferBindingTarget::ArrayBuffer, @instance_buffer_objects[direction])
+    # TODO: this buffer is large, but fixed; if more faces need to be drawn the buffer needs to be resized
+    GL.buffer_data(GL::BufferBindingTarget::ArrayBuffer, MAX_INSTANCES * 6 * sizeof(Float32), nil, GL::BufferUsage::StreamDraw)
+    # set and enable pointer to instance position data
+    GL.vertex_attrib_pointer(2, 3, GL::Type::Float, false, 6 * sizeof(Float32), 0)
+    GL.vertex_attrib_divisor(2, 1)
     GL.enable_vertex_attrib_array(2)
 
-    # fill the instance positions buffer
-    GL.bind_buffer(GL::BufferBindingTarget::ArrayBuffer, @instance_buffer_objects[direction])
-    # TODO: this buffer is large, but fixed; if more cubes need to be drawn the buffer needs to be resized
-    GL.buffer_data(GL::BufferBindingTarget::ArrayBuffer, MAX_INSTANCES * 3 * sizeof(Float32), nil, GL::BufferUsage::StreamDraw)
-    # set and enable pointer to instance position data
-    GL.vertex_attrib_pointer(3, 3, GL::Type::Float, false, 3 * sizeof(Float32), 0)
+    # set and enable pointer to instance color data
+    GL.vertex_attrib_pointer(3, 3, GL::Type::Float, false, 6 * sizeof(Float32), 3 * sizeof(Float32))
     GL.vertex_attrib_divisor(3, 1)
     GL.enable_vertex_attrib_array(3)
   end

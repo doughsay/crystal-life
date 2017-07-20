@@ -18,6 +18,7 @@ class App
     @camera_zoom = -100.0
     @camera_tilt = -0.61
     @points = {} of Point => Bool
+    @wireframe = false
   end
 
   def run
@@ -77,15 +78,22 @@ class App
     GL.clear_color(GL::Color.new(0.2, 0.3, 0.5, 1.0))
     GL.enable(GL::Capability::DepthTest)
     GL.enable(GL::Capability::CullFace)
-    # GL.polygon_mode(GL::PolygonFace::FrontAndBack, GL::PolygonMode::Line)
+
+    # wireframe mode
+    if @wireframe
+      GL.enable(GL::Capability::LineSmooth)
+      GL.line_width(2.0)
+      GL.polygon_mode(GL::PolygonFace::FrontAndBack, GL::PolygonMode::Line)
+    end
 
     projection = GLM.perspective(45.0_f32, (1440.0 / 900.0).to_f32, 0.1_f32, 1000.0_f32)
     @shader_program.set_uniform_matrix_4f("projection", projection)
 
-    # noise_cubes(120)
+    noise_cubes(120)
     # fill_cubes(1)
     # @scene.load_instances({Point.new(0,0,0) => true})
-    noise_cubes(20)
+    # noise_cubes(30)
+    # @scene.load_instances({Point.new(0,0,0) => true, Point.new(1,1,0) => true})
   end
 
   private def clear

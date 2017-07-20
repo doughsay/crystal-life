@@ -12,6 +12,8 @@ class Window
 
     raise "Failed to open GLFW window" if @handle.is_a?(Nil)
 
+    GLFW.set_input_mode(@handle, GLFW::InputMode::Cursor, GLFW::InputModeValue::CursorDisabled)
+
     @last_time = GLFW.get_time
     @frames = 0
   end
