@@ -6,7 +6,6 @@ uniform vec3 camera_position;
 // inputs
 in vec3 fragment_position; // in world-space
 in vec3 vertex_normal;
-in vec3 instance_color;
 
 // outputs
 out vec4 fragment_color;
@@ -14,8 +13,8 @@ out vec4 fragment_color;
 // program
 void main() {
   // for now, the light position will be the camera position
-  // vec3 light_position = camera_position;
-  vec3 light_position = vec3(20.0f, 128.0f, 60.0f);
+  vec3 light_position = camera_position;
+  // vec3 light_position = vec3(20.0f, 128.0f, 60.0f);
 
   // light color
   vec3 light_color = vec3(1.0f, 1.0f, 1.0f);
@@ -38,7 +37,7 @@ void main() {
   vec3 specular = specular_strength * spec * light_color;
 
   // lighting result
-  vec3 result = (ambient + diffuse + specular) * instance_color;
+  vec3 result = (ambient + diffuse + specular) * vec3(0.5, 0.5, 0.5);
 
   // send out final fragment color
   fragment_color = vec4(result, 1.0f);

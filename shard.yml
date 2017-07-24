@@ -2,7 +2,7 @@ name: crlife
 version: 1.0.0
 
 dependencies:
-  lib_glfw:
-    github: lirith-engine/lib_glfw
+  glfw:
+    github: doughsay/crystal-glfw
   gl:
     github: doughsay/crystal-gl
