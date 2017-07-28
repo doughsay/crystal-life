@@ -5,7 +5,7 @@ require "./shader_program"
 require "./direction"
 # require "./cube_new"
 require "./point"
-require "./noise"
+# require "./noise"
 require "./camera"
 require "./chunk"
 
@@ -23,7 +23,7 @@ class App
     @last_x = 0.0
     @last_y = 0.0
 
-    @chunks = [Chunk.new({x: 0, z: 0}), Chunk.new({x: 1, z: 0})]
+    @chunks = [] of Chunk
   end
 
   def run
@@ -125,6 +125,12 @@ class App
     #   Point.new(0,0,-1), Point.new(0,0,0), Point.new(0,0,1),
     #   Point.new(1,0,-1), Point.new(1,0,0), Point.new(1,0,1)
     # ])
+
+    (-10..10).each do |z|
+      (-10..10).each do |x|
+        @chunks << Chunk.new({x: x, z: z})
+      end
+    end
   end
 
   private def clear
@@ -136,15 +142,17 @@ class App
 
     clear
 
-    model = GLM::Mat4.identity
     view = @camera.view_matrix
 
     @shader_program.use do
-      @shader_program.set_uniform_matrix_4f("model", model)
       @shader_program.set_uniform_matrix_4f("view", view)
       @shader_program.set_uniform_vector_3f("camera_position", @camera.position)
 
-      @chunks.each(&.render)
+      @chunks.each do |chunk|
+        model = GLM.translate(GLM.vec3(chunk.coords[:x] * 16.0, 0.0, chunk.coords[:z] * 16.0))
+        @shader_program.set_uniform_matrix_4f("model", model)
+        chunk.render
+      end
     end
   end
 
