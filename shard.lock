@@ -8,3 +8,7 @@ shards:
     github: doughsay/crystal-glfw
     commit: fb8639a78930300e422278c2828bad4f9e2da8ac
 
+  open-simplex-noise:
+    github: doughsay/crystal-open-simplex-noise
+    version: 1.0.0
+

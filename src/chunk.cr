@@ -1,6 +1,7 @@
+require "open-simplex-noise"
+
 require "./chunk_mesh"
 require "./chunk_renderer"
-require "./noise/open_simplex_noise"
 
 class Chunk
   alias Vec2 = NamedTuple(x: Int32, z: Int32)
@@ -45,7 +46,7 @@ class Chunk
           x = cx + (@coords[:x] * 16)
           y = cy
           z = cz + (@coords[:z] * 16)
-          height = @noise.generate(x / 64.0, z / 64.0) * 64 + 64
+          height = @noise.generate(x / 64.0, z / 64.0, 0.0, 0.0) * 64 + 64
           @blocks[{x: cx, y: cy, z: cz}] = STONE if y < height
         end
       end

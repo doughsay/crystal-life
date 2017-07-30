@@ -6,3 +6,6 @@ dependencies:
     github: doughsay/crystal-glfw
   gl:
     github: doughsay/crystal-gl
+  open-simplex-noise:
+    github: doughsay/crystal-open-simplex-noise
+    version: "~> 1.0.0"
