@@ -3,9 +3,7 @@ require "./glm"
 require "./window"
 require "./shader_program"
 require "./direction"
-# require "./cube_new"
 require "./point"
-# require "./noise"
 require "./camera"
 require "./chunk_manager"
 
@@ -13,10 +11,8 @@ class App
   def initialize
     @window = Window.new(1440, 900, "OMG! 3D!")
     @window.set_context_current
+    @window.set_swap_interval(0)
     @shader_program = ShaderProgram.new("./src/shaders/cube.vert", "./src/shaders/cube.frag")
-    # @scene = Cube.new
-    # @rand = Random.new
-    # @points = {} of Point => Bool
     @wireframe = false
     @camera = Camera.new(GLM.vec3(0.0, 130.0, 0.0))
     @first_mouse = true
@@ -25,7 +21,7 @@ class App
 
     @last_chunk_position = {0, 0}
 
-    @chunk_manager = ChunkManager.new(@last_chunk_position, 2, 7657644535_i64)
+    @chunk_manager = ChunkManager.new(@last_chunk_position, 16, 7657644535_i64)
   end
 
   def run
@@ -37,69 +33,6 @@ class App
 
     teardown
   end
-
-  # private def random_cubes(size)
-  #   @points = {} of Point => Bool
-  #   (-size..size).each do |x|
-  #     (-size..size).each do |y|
-  #       (-size..size).each do |z|
-  #         if @rand.next_bool
-  #           @points[Point.new(x, y, z)] = true
-  #         end
-  #       end
-  #     end
-  #   end
-  #   puts @points.size
-  #   @scene.load_instances(@points)
-  # end
-  #
-  # private def fill_cubes(size)
-  #   @points = {} of Point => Bool
-  #   (-size..size).each do |x|
-  #     (-size..size).each do |y|
-  #       (-size..size).each do |z|
-  #         @points[Point.new(x, y, z)] = true
-  #       end
-  #     end
-  #   end
-  #   puts @points.size
-  #   @scene.load_instances(@points)
-  # end
-  #
-  # private def noise_cubes(size)
-  #   @points = {} of Point => Bool
-  #   (-size..size).each do |x|
-  #     (-size..size).each do |y|
-  #       (-size..size).each do |z|
-  #         if Noise.generate(x.to_f / 30.0, y.to_f / 30.0, z.to_f / 30.0) > 0.05
-  #           @points[Point.new(x, y, z)] = true
-  #         end
-  #       end
-  #     end
-  #   end
-  #   puts @points.size
-  #   @scene.load_instances(@points)
-  # end
-  #
-  # private def chunks(origins)
-  #   @points = {} of Point => Bool
-  #   origins.each do |origin|
-  #     (0...128).each do |cy|
-  #       (0...16).each do |cz|
-  #         (0...16).each do |cx|
-  #           x = cx + (origin.x * 16)
-  #           y = cy + (origin.y * 128)
-  #           z = cz + (origin.z * 16)
-  #           if Noise.generate(x.to_f / 30.0, y.to_f / 30.0, z.to_f / 30.0) > 0.05
-  #             @points[Point.new(x, y, z)] = true
-  #           end
-  #         end
-  #       end
-  #     end
-  #   end
-  #   puts @points.size
-  #   @scene.load_instances(@points)
-  # end
 
   private def setup
     GL.clear_color(GL::Color.new(0.2, 0.3, 0.5, 1.0))
@@ -117,23 +50,7 @@ class App
     projection = GLM.perspective(45.0_f32, (1440.0 / 900.0).to_f32, 0.1_f32, 1000.0_f32)
     @shader_program.set_uniform_matrix_4f("projection", projection)
 
-    # noise_cubes(120)
-    # fill_cubes(1)
-    # @scene.load_instances({Point.new(2,0,0) => true, Point.new(-2,0,0) => true})
-    # noise_cubes(30)
-    # @scene.load_instances({Point.new(0,0,0) => true, Point.new(1,1,0) => true})
-    # chunks([
-    #   Point.new(-1,0,-1), Point.new(-1,0,0), Point.new(-1,0,1),
-    #   Point.new(0,0,-1), Point.new(0,0,0), Point.new(0,0,1),
-    #   Point.new(1,0,-1), Point.new(1,0,0), Point.new(1,0,1)
-    # ])
-
-    # (-2..2).each do |z|
-    #   (-2..2).each do |x|
-    #     @chunks << Chunk.new({x: x, z: z}, 45764647_i64)
-    #   end
-    # end
-    @chunk_manager.update(@last_chunk_position)
+    @chunk_manager.origin = @last_chunk_position
   end
 
   private def clear
@@ -145,8 +62,10 @@ class App
 
     if @last_chunk_position != @camera.chunk_position
       @last_chunk_position = @camera.chunk_position
-      @chunk_manager.update(@last_chunk_position)
+      @chunk_manager.origin = @last_chunk_position
     end
+
+    @chunk_manager.update
 
     clear
 

@@ -27,6 +27,10 @@ class Window
     GLFW.set_current_context(@handle)
   end
 
+  def set_swap_interval(interval)
+    GLFW.swap_interval(interval)
+  end
+
   def open(&block)
     while true
       update_delta_time
