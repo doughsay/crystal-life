@@ -5,7 +5,7 @@ uniform vec3 camera_position;
 
 // inputs
 in vec3 fragment_position; // in world-space
-in vec3 vertex_normal;
+in vec3 fragment_normal;
 
 // outputs
 out vec4 fragment_color;
@@ -24,7 +24,7 @@ void main() {
   vec3 ambient = ambient_strength * light_color;
 
   // diffuse light
-  vec3 normal = normalize(vertex_normal);
+  vec3 normal = normalize(fragment_normal);
   vec3 light_direction = normalize(light_position - fragment_position);
   float diff = max(dot(normal, light_direction), 0.0f);
   vec3 diffuse = diff * light_color;

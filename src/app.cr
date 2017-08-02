@@ -7,7 +7,7 @@ require "./direction"
 require "./point"
 # require "./noise"
 require "./camera"
-require "./chunk"
+require "./chunk_manager"
 
 class App
   def initialize
@@ -23,7 +23,9 @@ class App
     @last_x = 0.0
     @last_y = 0.0
 
-    @chunks = [] of Chunk
+    @last_chunk_position = {0, 0}
+
+    @chunk_manager = ChunkManager.new(@last_chunk_position, 2, 7657644535_i64)
   end
 
   def run
@@ -126,11 +128,12 @@ class App
     #   Point.new(1,0,-1), Point.new(1,0,0), Point.new(1,0,1)
     # ])
 
-    (-10..10).each do |z|
-      (-10..10).each do |x|
-        @chunks << Chunk.new({x: x, z: z})
-      end
-    end
+    # (-2..2).each do |z|
+    #   (-2..2).each do |x|
+    #     @chunks << Chunk.new({x: x, z: z}, 45764647_i64)
+    #   end
+    # end
+    @chunk_manager.update(@last_chunk_position)
   end
 
   private def clear
@@ -140,6 +143,11 @@ class App
   private def render(delta_time)
     process_input(delta_time)
 
+    if @last_chunk_position != @camera.chunk_position
+      @last_chunk_position = @camera.chunk_position
+      @chunk_manager.update(@last_chunk_position)
+    end
+
     clear
 
     view = @camera.view_matrix
@@ -148,8 +156,8 @@ class App
       @shader_program.set_uniform_matrix_4f("view", view)
       @shader_program.set_uniform_vector_3f("camera_position", @camera.position)
 
-      @chunks.each do |chunk|
-        model = GLM.translate(GLM.vec3(chunk.coords[:x] * 16.0, 0.0, chunk.coords[:z] * 16.0))
+      @chunk_manager.chunks.each do |point, chunk|
+        model = GLM.translate(GLM.vec3(point[0] * 16.0, 0.0, point[1] * 16.0))
         @shader_program.set_uniform_matrix_4f("model", model)
         chunk.render
       end
@@ -206,6 +214,6 @@ class App
   end
 
   private def teardown
-    @chunks.each(&.unload)
+    @chunk_manager.chunks.values.each(&.unload)
   end
 end

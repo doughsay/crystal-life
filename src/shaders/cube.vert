@@ -2,17 +2,15 @@
 
 // vertex attributes
 layout (location = 0) in vec3 vertex_model_position;
-layout (location = 1) in vec3 vertex_normal_passthrough;
+layout (location = 1) in vec3 vertex_normal;
 layout (location = 2) in vec3 instance_position;
 
 // uniforms
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
+uniform mat4 model, view, projection;
 
 // oputputs
 out vec3 fragment_position; // in world-space
-out vec3 vertex_normal;
+out vec3 fragment_normal;
 
 // program
 void main() {
@@ -24,5 +22,5 @@ void main() {
 
   // send outputs
   fragment_position = vec3(model * vertex_vec4);
-  vertex_normal = vertex_normal_passthrough;
+  fragment_normal = vertex_normal;
 }

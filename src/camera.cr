@@ -1,8 +1,10 @@
+require "./glm"
+
 class Camera
   # Defaults
   YAW = -90.0
   PITCH =  0.0
-  SPEED =  10.0
+  SPEED =  20.0
   SENSITIVTY =  0.1
   ZOOM =  45.0
 
@@ -15,7 +17,7 @@ class Camera
     Down
   end
 
-  getter :position
+  getter :position, :chunk_position
 
   # Vectors
   @position : GLM::Vec3
@@ -23,6 +25,7 @@ class Camera
   @up : GLM::Vec3
   @right : GLM::Vec3
   @world_up : GLM::Vec3
+  @world_front : GLM::Vec3
 
   # Euler Angles
   @yaw : Float64
@@ -35,9 +38,12 @@ class Camera
 
   def initialize(@position = GLM.vec3(0.0, 0.0, 0.0), @world_up = GLM.vec3(0.0, 1.0, 0.0), @yaw = YAW, @pitch = PITCH, @speed = SPEED, @sensitivity = SENSITIVTY, @zoom = ZOOM)
     @front = GLM.vec3(0.0, 0.0, 0.0)
+    @world_front = GLM.vec3(0.0, 0.0, 0.0)
     @up = GLM.vec3(0.0, 0.0, 0.0)
     @right = GLM.vec3(0.0, 0.0, 0.0)
+    @chunk_position = {0, 0}
     update_vectors
+    update_chunk_position
   end
 
   def view_matrix
@@ -49,9 +55,9 @@ class Camera
 
     case direction
     when Direction::Forward
-      @position += @front * velocity
+      @position += @world_front * velocity
     when Direction::Backward
-      @position -= @front * velocity
+      @position -= @world_front * velocity
     when Direction::Left
       @position -= @right * velocity
     when Direction::Right
@@ -61,6 +67,8 @@ class Camera
     when Direction::Down
       @position -= @world_up * velocity
     end
+
+    update_chunk_position
   end
 
   def process_mouse(x_offset : Float64, y_offset : Float64, constrain_pitch : Bool = true)
@@ -88,8 +96,15 @@ class Camera
       Math.sin(GLM.deg_to_rad(@yaw)) * Math.cos(GLM.deg_to_rad(@pitch))
     ).normalize
 
+    # remove the y component and normalize to get a world-front vector
+    @world_front = GLM.vec3(@front.x, 0.0, @front.z).normalize
+
     # Also re-calculate the right and up vector
     @right = @front.cross(@world_up).normalize
     @up = @right.cross(@front).normalize
+  end
+
+  private def update_chunk_position
+    @chunk_position = {@position.x.floor.to_i / 16, @position.z.floor.to_i / 16}
   end
 end

@@ -12,9 +12,9 @@ class Chunk
 
   getter :coords
 
-  def initialize(@coords : Vec2)
+  def initialize(@coords : Vec2, @seed = 0_i64)
     @blocks = Hash(Vec3, Block).new
-    @noise = OpenSimplexNoise.new(9875145809_i64)
+    @noise = OpenSimplexNoise.new(@seed)
     populate_from_noise
     @mesh = ChunkMesh.new
     @renderer = ChunkRenderer.new
