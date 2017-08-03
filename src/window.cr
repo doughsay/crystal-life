@@ -34,7 +34,7 @@ class Window
   def open(&block)
     while true
       update_delta_time
-      print_fps
+      update_fps
       break if key_pressed?(GLFW::Key::Escape) && GLFW.window_should_close(@handle)
       yield @delta_time
       GLFW.swap_buffers(@handle)
@@ -58,13 +58,16 @@ class Window
     @last_frame = current_frame
   end
 
-  private def print_fps
+  private def update_fps
     current_frame = GLFW.get_time
     @frames += 1
 
     diff = current_frame - @last_fps_print
-    if diff >= 2.0
-      puts "#{(diff * 1000.0) / @frames} ms/frame"
+    if diff >= 0.5
+      ms_per_frame = ((diff * 1000.0) / @frames).round(2)
+      fps = ((1 / ms_per_frame) * 1000.0).round
+      title = "#{ms_per_frame} ms/frame (#{fps} fps)"
+      GLFW.set_window_title(@handle, title)
       @frames = 0
       @last_fps_print += diff
     end
