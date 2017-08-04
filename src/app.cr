@@ -21,7 +21,7 @@ class App
 
     @last_chunk_position = {0, 0}
 
-    @chunk_manager = ChunkManager.new(@last_chunk_position, 16, 7657644535_i64)
+    @chunk_manager = ChunkManager.new(@last_chunk_position, 6, 7657644535_i64)
   end
 
   def run

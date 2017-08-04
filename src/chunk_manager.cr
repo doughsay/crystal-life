@@ -1,12 +1,14 @@
 require "./circle"
 require "./chunk"
+require "./seed"
 
 class ChunkManager
   alias Point = Tuple(Int32, Int32)
 
   getter :chunks
 
-  def initialize(@origin : Point, @radius : Int32, @seed = 0_i64)
+  def initialize(@origin : Point, @radius : Int32, seed = 0_i64)
+    @seed = Seed.new(seed)
     @chunks = {} of Point => Chunk
     @chunks_to_load = Set(Point).new
     @chunks_to_unload = Set(Point).new

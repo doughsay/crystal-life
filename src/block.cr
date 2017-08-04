@@ -1,0 +1,3 @@
+enum Block
+  Stone
+end

@@ -6,7 +6,7 @@ shards:
 
   glfw:
     github: doughsay/crystal-glfw
-    commit: fb8639a78930300e422278c2828bad4f9e2da8ac
+    commit: b87db3d3ef43b189cbc7d3f2fe77c2705abaccb6
 
   open-simplex-noise:
     github: doughsay/crystal-open-simplex-noise
