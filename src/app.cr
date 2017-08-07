@@ -21,7 +21,7 @@ class App
 
     @last_chunk_position = {0, 0}
 
-    @chunk_manager = ChunkManager.new(@last_chunk_position, 12)
+    @chunk_manager = ChunkManager.new(@last_chunk_position, 6)
   end
 
   def run
@@ -81,6 +81,8 @@ class App
         chunk.render
       end
     end
+
+    Fiber.yield
   end
 
   private def process_input(delta_time)

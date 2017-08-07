@@ -57,7 +57,10 @@ class ChunkManager
     # chunk is ready to read, read it and add it to chunks (if it's still needed)
     if @chunk_client.chunk_ready?
       # TODO: if it's still needed
+      start = GLFW.get_time
       chunk, point = @chunk_client.take
+      time = (GLFW.get_time - start) * 1000
+      puts "chunk took #{time} to be receieved"
       if chunk && point
         @chunks[point] = chunk
       end

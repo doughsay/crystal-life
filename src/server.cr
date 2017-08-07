@@ -11,7 +11,7 @@ def handle_connection(socket, client_id, seed, chunks)
     message = socket.gets
     if message
       x, z = message.split(",").map(&.to_i)
-      puts "#{client_id}: received #{message}"
+      # puts "#{client_id}: received #{message}"
       chunk = chunks[{x: x, z: z}] ||= ServerChunk.new({x: x, z: z}, seed)
       socket << chunk.to_response + "\n"
     else
