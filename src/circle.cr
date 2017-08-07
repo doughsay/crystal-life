@@ -9,7 +9,7 @@ class Circle
     (-@radius..@radius).each do |x|
       (-@radius..@radius).each do |y|
         if x * x + y * y <= @radius * @radius
-          points << {@origin[0] + x, @origin[1] + y}
+          points << {@origin[0] + x, @origin[1] + y} unless x.abs == @radius && y == 0 || y.abs == @radius && x == 0
         end
       end
     end

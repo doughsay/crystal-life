@@ -13,8 +13,8 @@ out vec4 fragment_color;
 // program
 void main() {
   // for now, the light position will be the camera position
-  vec3 light_position = camera_position;
-  // vec3 light_position = vec3(20.0f, 128.0f, 60.0f);
+  // vec3 light_position = camera_position;
+  vec3 light_position = vec3(20.0f, 128.0f, 60.0f);
 
   // light color
   vec3 light_color = vec3(1.0f, 1.0f, 1.0f);
@@ -37,7 +37,7 @@ void main() {
   vec3 specular = specular_strength * spec * light_color;
 
   // lighting result
-  vec3 result = (ambient + diffuse + specular) * vec3(0.5, 0.5, 0.5);
+  vec3 result = (ambient + diffuse + specular) * vec3(0.9, 0.5, 0.3);
 
   // send out final fragment color
   fragment_color = vec4(result, 1.0f);

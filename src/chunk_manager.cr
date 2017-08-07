@@ -1,17 +1,17 @@
 require "./circle"
 require "./chunk"
-require "./seed"
+require "./chunk_client"
 
 class ChunkManager
   alias Point = Tuple(Int32, Int32)
 
   getter :chunks
 
-  def initialize(@origin : Point, @radius : Int32, seed = 0_i64)
-    @seed = Seed.new(seed)
+  def initialize(@origin : Point, @radius : Int32)
     @chunks = {} of Point => Chunk
     @chunks_to_load = Set(Point).new
     @chunks_to_unload = Set(Point).new
+    @chunk_client = ChunkClient.new
   end
 
   def origin=(new_origin)
@@ -54,23 +54,30 @@ class ChunkManager
   end
 
   def update
-    # process the load queue one at a time
-    unless @chunks_to_load.empty?
-      point = @chunks_to_load.first
-      @chunks[point] = Chunk.new({x: point[0], z: point[1]}, @seed)
-      @chunks_to_load.delete(point)
-      return true
+    # chunk is ready to read, read it and add it to chunks (if it's still needed)
+    if @chunk_client.chunk_ready?
+      # TODO: if it's still needed
+      chunk, point = @chunk_client.take
+      if chunk && point
+        @chunks[point] = chunk
+      end
     end
 
-    # process the unload queue one at a time
+    # process the load queue
+    unless @chunk_client.busy? || @chunks_to_load.empty?
+      point = @chunks_to_load.first
+      @chunk_client.load_chunk(point)
+      @chunks_to_load.delete(point)
+    end
+
+    # process the unload queue
     unless @chunks_to_unload.empty?
       point = @chunks_to_unload.first
       @chunks[point].unload
       @chunks.delete(point)
       @chunks_to_unload.delete(point)
-      return true
     end
 
-    false
+    true
   end
 end
