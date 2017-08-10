@@ -154,16 +154,16 @@ class ChunkRenderer
     draw_direction(Down)
   end
 
-  private def load_direction_instances(direction : Direction, faces : Array(Chunk::Vec3))
+  private def load_direction_instances(direction : Direction, faces : Array(XYZ))
     raise "Too many instances" if faces.size > MAX_INSTANCES
 
     GL.bind_vertex_array(@vertex_array_objects[direction])
     @instances[direction] = Array(Float32).build(3 * faces.size) do |buffer|
       i = 0
       faces.each do |pos|
-        buffer[i] = pos[:x].to_f32
-        buffer[i+1] = pos[:y].to_f32
-        buffer[i+2] = pos[:z].to_f32
+        buffer[i] = pos.x.to_f32
+        buffer[i+1] = pos.y.to_f32
+        buffer[i+2] = pos.z.to_f32
         i += 3
       end
       3 * faces.size

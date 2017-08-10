@@ -3,7 +3,6 @@ require "./glm"
 require "./window"
 require "./shader_program"
 require "./direction"
-require "./point"
 require "./camera"
 require "./chunk_manager"
 
@@ -19,7 +18,7 @@ class App
     @last_x = 0.0
     @last_y = 0.0
 
-    @last_chunk_position = {0, 0}
+    @last_chunk_position = XZ.new(0, 0)
 
     @chunk_manager = ChunkManager.new(@last_chunk_position, 6)
   end
@@ -76,7 +75,7 @@ class App
       @shader_program.set_uniform_vector_3f("camera_position", @camera.position)
 
       @chunk_manager.chunks.each do |point, chunk|
-        model = GLM.translate(GLM.vec3(point[0] * 16.0, 0.0, point[1] * 16.0))
+        model = GLM.translate(GLM.vec3(point.x * 16.0, 0.0, point.z * 16.0))
         @shader_program.set_uniform_matrix_4f("model", model)
         chunk.render
       end

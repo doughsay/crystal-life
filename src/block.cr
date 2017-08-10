@@ -1,3 +1,0 @@
-enum Block
-  Stone
-end

@@ -1,22 +1,20 @@
-require "./circle"
 require "./chunk"
 require "./chunk_client"
+require "./xz"
 
 class ChunkManager
-  alias Point = Tuple(Int32, Int32)
-
   getter :chunks
 
-  def initialize(@origin : Point, @radius : Int32)
-    @chunks = {} of Point => Chunk
-    @chunks_to_load = Set(Point).new
-    @chunks_to_unload = Set(Point).new
+  def initialize(@origin : XZ, @radius : Int32)
+    @chunks = {} of XZ => Chunk
+    @chunks_to_load = Set(XZ).new
+    @chunks_to_unload = Set(XZ).new
     @chunk_client = ChunkClient.new
   end
 
   def origin=(new_origin)
     @origin = new_origin
-    points = Circle.new(@origin, @radius).square
+    points = circle(@origin, @radius)
 
     # for all currently loaded chunks
     # if the chunk is no longer in view
@@ -60,7 +58,6 @@ class ChunkManager
       start = GLFW.get_time
       chunk, point = @chunk_client.take
       time = (GLFW.get_time - start) * 1000
-      puts "chunk took #{time} to be receieved"
       if chunk && point
         @chunks[point] = chunk
       end
@@ -82,5 +79,17 @@ class ChunkManager
     end
 
     true
+  end
+
+  private def circle(center_point, radius)
+    points = Set(XZ).new
+    (-@radius..@radius).each do |x|
+      (-@radius..@radius).each do |z|
+        if x * x + z * z <= @radius * @radius && !(x.abs == @radius && z == 0 || z.abs == @radius && x == 0)
+          points.add(@origin + {x, z})
+        end
+      end
+    end
+    points
   end
 end

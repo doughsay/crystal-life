@@ -1,14 +1,18 @@
 version: 1.0
 shards:
+  cannon:
+    github: Papierkorb/cannon
+    version: 0.2.1
+
   gl:
     github: doughsay/crystal-gl
-    commit: 42b4df8b5c92e101af13a5cfdcd17328ec5503c1
+    version: 0.0.1
 
   glfw:
     github: doughsay/crystal-glfw
-    commit: b87db3d3ef43b189cbc7d3f2fe77c2705abaccb6
+    version: 0.0.1
 
   open-simplex-noise:
     github: doughsay/crystal-open-simplex-noise
-    version: 1.0.0
+    version: 1.0.1
 

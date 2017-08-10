@@ -4,8 +4,19 @@ version: 1.0.0
 dependencies:
   glfw:
     github: doughsay/crystal-glfw
+    version: "~> 0.0.1"
   gl:
     github: doughsay/crystal-gl
+    version: "~> 0.0.1"
   open-simplex-noise:
     github: doughsay/crystal-open-simplex-noise
-    version: "~> 1.0.0"
+    version: "~> 1.0"
+  cannon:
+    github: Papierkorb/cannon
+    version: "~> 0.2"
+
+targets:
+  server:
+    main: src/server.cr
+  game:
+    main: src/main.cr

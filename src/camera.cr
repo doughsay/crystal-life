@@ -41,7 +41,7 @@ class Camera
     @world_front = GLM.vec3(0.0, 0.0, 0.0)
     @up = GLM.vec3(0.0, 0.0, 0.0)
     @right = GLM.vec3(0.0, 0.0, 0.0)
-    @chunk_position = {0, 0}
+    @chunk_position = XZ.new(0, 0)
     update_vectors
     update_chunk_position
   end
@@ -105,6 +105,6 @@ class Camera
   end
 
   private def update_chunk_position
-    @chunk_position = {@position.x.floor.to_i / 16, @position.z.floor.to_i / 16}
+    @chunk_position = XZ.new(@position.x.floor.to_i / 16, @position.z.floor.to_i / 16)
   end
 end
